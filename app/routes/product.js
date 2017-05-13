@@ -1,4 +1,4 @@
-var connectionFactory = require('../../config/connectionFactory');
+var connectionFactory = require('../infra/connectionFactory');
 
 module.exports = function(app) {
     app.get('/products', function(req, res) {
