@@ -7,7 +7,14 @@ module.exports = function(app) {
             if(err != null && err != undefined)
                 res.send(err);
             
-            res.render('product/list', {products: result});
+            res.format({
+                html: function() {
+                    res.render('product/list', {products: result});
+                },
+                json: function() {
+                    res.json(result);
+                }
+            });
         });
         
         connection.end();
