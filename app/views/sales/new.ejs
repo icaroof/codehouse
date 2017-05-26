@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <form action='/sales' method="post">
+            <div>
+                <input type="text" name="message"/>
+            </div>
+            <div>
+                <select name="book[id]">
+                    <%for(var i = 0; i < list.length; i++){%>
+                        <option value="<%=list[i].id%>"><%=list[i].title%></option>
+                    <%}%>
+                </select>
+            </div>
+            <input type="submit" value="Submit sale"/>
+        </form>
+    </body>
+</html>
