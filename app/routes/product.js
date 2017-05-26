@@ -1,11 +1,11 @@
 module.exports = function(app) {
-    app.get('/products', function(req, res) {
+    app.get('/products', function(req, res, next) {
         var connection = app.infra.connectionFactory();
         var productDAO = new app.infra.ProductDAO(connection);
         
         productDAO.loadAll(function(err, result){
-            if(err != null && err != undefined)
-                res.send(err);
+            if(err)
+                return next(err);
             
             res.format({
                 html: function() {
@@ -20,7 +20,7 @@ module.exports = function(app) {
         connection.end();
     });
     
-    app.post('/products', function(req, res) {
+    app.post('/products', function(req, res, next) {
         var connection = app.infra.connectionFactory();
         var productDAO = new app.infra.ProductDAO(connection);
         var product = req.body;
@@ -42,8 +42,8 @@ module.exports = function(app) {
         }
         
         productDAO.save(product, function(err, result) {
-            if(err != null && err != undefined)
-                res.status(500).send(err);
+            if(err)
+                return next(err);
             
             res.redirect('/products');
         });
