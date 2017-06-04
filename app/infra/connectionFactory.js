@@ -3,7 +3,7 @@ var mysql = require('mysql');
 function createDBConnection() {
     console.log('Connecting to ' + process.env.NODE_ENV + ' database.');
     
-    if(!process.env.NODE_ENV || process.env.node === 'dev') {
+    if(!process.env.NODE_ENV || process.env.NODE_ENV == 'dev') {
         return connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
