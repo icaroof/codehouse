@@ -14,6 +14,8 @@ module.exports = function(app) {
     });
     
     app.post("/sales", function(req, res) {
+        var sale = req.body;
+        app.get('io').emit('newSale', sale);
         res.redirect('sales/new');
     });
 }
